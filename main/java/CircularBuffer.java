@@ -1,11 +1,13 @@
 public class CircularBuffer <E>
 {
 
+    private Object[] data;
 
-    public CircularBuffer(E i)
+    public CircularBuffer(int i)
     {
+        data = new Object[i];
 
-
+        int[] rawrs = new int[10];
     }
 
     public void write(E i)
