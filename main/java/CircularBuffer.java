@@ -39,7 +39,10 @@ public class CircularBuffer <E>
 
     public void clear()
     {
-
+        data = new Object[data.length];
+        currentRead = 0;
+        current = 0;
+        totalElements = 0;
     }
 
 
