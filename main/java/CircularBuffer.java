@@ -3,12 +3,14 @@ public class CircularBuffer <E>
 
     private Object[] data;
     private int current;
+    private int currentRead;
     private int totalElements;
 
     public CircularBuffer(int i)
     {
         data = new Object[i];
         current = 0;
+        currentRead = 0;
         totalElements = 0;
     }
 
@@ -18,8 +20,8 @@ public class CircularBuffer <E>
         {
             throw new BufferIOException("Tried to write to full buffer");
         }
-        //TODO Read and Write should have seperate pointers
-        //TODO Read function advances separate pointer from Write function
+
+        //TODO The read function removes an element!!!
 
         data[current] = i;
 
@@ -56,7 +58,16 @@ public class CircularBuffer <E>
         {
             throw new BufferIOException("Tried to read from empty buffer");
         }
-        current++;
+        data[current] = null;
+
+        if (current == 0)
+        {
+            current = data.length - 1;
+        }
+        else
+        {
+            current--;
+        }
 
         return answer;
     }
