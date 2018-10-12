@@ -18,6 +18,8 @@ public class CircularBuffer <E>
         {
             throw new BufferIOException("Tried to write to full buffer");
         }
+        //TODO Read and Write should have seperate pointers
+        //TODO Read function advances separate pointer from Write function
 
         data[current] = i;
 
@@ -29,6 +31,7 @@ public class CircularBuffer <E>
         {
             current++;
         }
+        totalElements++;
     }
 
     public void clear()
