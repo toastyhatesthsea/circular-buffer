@@ -12,9 +12,23 @@ public class CircularBuffer <E>
         totalElements = 0;
     }
 
-    public void write(E i)
+    public void write(E i)throws BufferIOException
     {
+        if (totalElements == data.length)
+        {
+            throw new BufferIOException("Tried to write to full buffer");
+        }
 
+        data[current] = i;
+
+        if (current == data.length - 1)
+        {
+            current = 0;
+        }
+        else
+        {
+            current++;
+        }
     }
 
     public void clear()
@@ -23,10 +37,18 @@ public class CircularBuffer <E>
     }
 
 
-    public E read()
+    public E read() throws BufferIOException
     {
+        E answer;
 
-        return null;
+        answer = (E)data[current];
+
+        if (answer == null)
+        {
+            throw new BufferIOException("Tried to read from empty buffer");
+        }
+
+        return answer;
     }
 
     public void overwrite(E i)
