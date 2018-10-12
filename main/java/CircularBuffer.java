@@ -39,14 +39,21 @@ public class CircularBuffer <E>
 
     public E read() throws BufferIOException
     {
-        E answer;
+        E answer = null;
 
-        answer = (E)data[current];
+        try
+        {
+            answer = (E) data[current];
+        } catch (IndexOutOfBoundsException e)
+        {
+            throw new BufferIOException("Tried to read from empty buffer");
+        }
 
         if (answer == null)
         {
             throw new BufferIOException("Tried to read from empty buffer");
         }
+        current++;
 
         return answer;
     }
