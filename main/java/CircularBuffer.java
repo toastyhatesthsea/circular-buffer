@@ -1,3 +1,7 @@
+/**
+ * A circular ring buffer data structure
+ * @param <E>
+ */
 public class CircularBuffer <E>
 {
 
@@ -14,6 +18,11 @@ public class CircularBuffer <E>
         totalElements = 0;
     }
 
+    /**
+     * Writes element to front of buffer. When buffer is full will no longer write.
+     * @param i
+     * @throws BufferIOException
+     */
     public void write(E i)throws BufferIOException
     {
         //currentRead = current;
@@ -46,6 +55,11 @@ public class CircularBuffer <E>
     }
 
 
+    /**
+     * Removes oldest element and returns it.
+     * @return E
+     * @throws BufferIOException
+     */
     public E read() throws BufferIOException
     {
         E answer = null;
@@ -79,9 +93,21 @@ public class CircularBuffer <E>
         return answer;
     }
 
-    public void overwrite(E i)
+    /**
+     * Acts as normal write function if buffer is not full. If full, removes oldest element and overwrites the newest.
+     * @param i E
+     * @throws BufferIOException
+     */
+    public void overwrite(E i)throws BufferIOException
     {
-
-
+        if (totalElements < data.length)
+        {
+            write(i);
+        }
+        else
+        {
+            read();
+            write(i);
+        }
     }
 }
