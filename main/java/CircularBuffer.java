@@ -30,9 +30,6 @@ public class CircularBuffer <E>
         {
             throw new BufferIOException("Tried to write to full buffer");
         }
-
-        //TODO The read function removes an element!!!
-
         data[current] = i;
 
         if (current == data.length - 1)
@@ -89,7 +86,6 @@ public class CircularBuffer <E>
             currentRead++;
             totalElements--;
         }
-
         return answer;
     }
 
